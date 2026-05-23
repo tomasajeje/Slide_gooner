@@ -26,6 +26,7 @@ static const char *mus[]      = { "st", "-e", "cmus", NULL };
 
 static key keys[] = {
     { MOD,             XK_q,                    run,        {.com = term}     },
+    { MOD,             XK_d,                    run,        {.com = dmenucmd} },
     { MOD,             XK_e,                    run,        {.com = file}     },
     { MOD,             XK_r,                    run,        {.com = mus}      },
     { MOD|ShiftMask,   XK_r,    	        run,        {.com = ani}      },
