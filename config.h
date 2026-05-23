@@ -4,6 +4,9 @@
 #define MOD Mod4Mask
 #define WIN_MOVE_STEP 40
 #define PAN_STEP 60 
+#define BORDER_WIDTH  2          /* Grosor del borde en píxeles */
+#define COLOR_FOCUS   0x88c0d0   /* Color cuando tiene el foco (ej. Nord Blue) */
+#define COLOR_UNFOCUS 0x4c566a   /* Color inactivo (ej. Nord Gray) */
 
 static const char *term[] = { "st", NULL };
 static const char *menu[] = { "rofi", "-show", "drun", NULL };
