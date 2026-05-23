@@ -113,7 +113,11 @@ void win_move(const Arg arg) {
 }
 
 void win_focus(client *c) {
+
+    if (cur) XSetWindowBorder(d, cur->w, COLOR_UNFOCUS);
+            
     cur = c;
+    XSetWindowBorder(d, cur->w, COLOR_FOCUS);
     XSetInputFocus(d, cur->w, RevertToParent, CurrentTime);
 }
 
@@ -264,8 +268,10 @@ void win_fs(const Arg arg) {
 
     if ((cur->f = cur->f ? 0 : 1)) {
         win_size(cur->w, &cur->wx, &cur->wy, &cur->ww, &cur->wh);
+        XSetWindowBorderWidth(d, cur->w, 0); // Ocultar borde
         XMoveResizeWindow(d, cur->w, 0, 0, sw, sh);
     } else {
+        XSetWindowBorderWidth(d, cur->w, BORDER_WIDTH); // Restaurar borde
         XMoveResizeWindow(d, cur->w,
             to_screen_x(cur->cx), to_screen_y(cur->cy),
             cur->ww, cur->wh);
