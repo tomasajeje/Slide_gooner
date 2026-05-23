@@ -386,6 +386,9 @@ void map_request(XEvent *e) {
         cur->cy = wy + vy;
     }
 
+    XSetWindowBorderWidth(d, w, BORDER_WIDTH);
+    XSetWindowBorder(d, w, COLOR_UNFOCUS);
+
     XMapWindow(d, w);
     win_focus(list->prev);
 }
