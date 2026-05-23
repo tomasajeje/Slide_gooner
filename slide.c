@@ -62,7 +62,7 @@ static void win_reposition(client *c) {
 
 static void reproject_all(void) {
     for (client *c = list; c; ) {
-        win_reposition(c);
+        if (!c->f) win_reposition(c); // Ignora las ventanas en fullscreen
         c = c->next;
         if (c == list) break;
     }
@@ -268,10 +268,11 @@ void win_fs(const Arg arg) {
 
     if ((cur->f = cur->f ? 0 : 1)) {
         win_size(cur->w, &cur->wx, &cur->wy, &cur->ww, &cur->wh);
-        XSetWindowBorderWidth(d, cur->w, 0); // Ocultar borde
+        XSetWindowBorderWidth(d, cur->w, 0); 
         XMoveResizeWindow(d, cur->w, 0, 0, sw, sh);
+        XRaiseWindow(d, cur->w); // <-- IMPORTANTE
     } else {
-        XSetWindowBorderWidth(d, cur->w, BORDER_WIDTH); // Restaurar borde
+        XSetWindowBorderWidth(d, cur->w, BORDER_WIDTH); 
         XMoveResizeWindow(d, cur->w,
             to_screen_x(cur->cx), to_screen_y(cur->cy),
             cur->ww, cur->wh);
@@ -475,7 +476,7 @@ int main(void) {
     XChangeProperty(d, wmcheck, net_supporting_wm_check, XA_WINDOW, 32,
         PropModeReplace, (unsigned char *)&wmcheck, 1);
     XChangeProperty(d, wmcheck, net_wm_name, ewmh_utf8_string, 8,
-        PropModeReplace, (unsigned char *)"slide", 5);
+        PropModeReplace, (unsigned char *)"slide-goon", 10);
 
     Atom supported[] = {
         net_supporting_wm_check,
