@@ -3,7 +3,7 @@ CFLAGS  = -std=c99 -Wall -Wextra -Wpedantic -Os $(shell pkg-config --cflags xcur
 LDFLAGS = -lX11 -lXcursor
 PREFIX  = /usr/local
 SRC     = slide.c
-BIN     = slide
+BIN     = slidegoon
 all: $(BIN)
 $(BIN): $(SRC) slide.h config.h
 	$(CC) $(CFLAGS) -o $@ $(SRC) $(LDFLAGS)
