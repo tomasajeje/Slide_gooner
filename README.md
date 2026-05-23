@@ -35,6 +35,9 @@ All configuration is done via the config.h file and is reloaded via recompiling 
 
 ---
 
+## Credits
+- Based on the original work by [@kantiankant](https://github.com/kantiankant).
+
 ## License
 
 GPL-v3
