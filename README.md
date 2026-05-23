@@ -1,7 +1,7 @@
 # Slide
 
 
-Slide is a panning X window manager. I don't really have much to say here.
+Slide is a panning X window manager made by kantiankant but modified by me
 
 > Note: This README is incomplete
 
