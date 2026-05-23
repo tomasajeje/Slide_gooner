@@ -43,8 +43,9 @@ static void (*events[LASTEvent])(XEvent *e) = {
     [MotionNotify]     = notify_motion
 };
 
-#include "config.h"
+static const char *dmenucmd[] = { "dmenu_run", NULL };
 
+#include "config.h"
 
 void win_size(Window w, int *x, int *y, unsigned int *width, unsigned int *height) {
     unsigned int bw, depth;
@@ -66,7 +67,6 @@ static void reproject_all(void) {
         if (c == list) break;
     }
 }
-
 
 void pan_by(int dx, int dy) {
     vx += dx;
@@ -112,12 +112,10 @@ void win_move(const Arg arg) {
     viewport_follow(cur); 
 }
 
-
 void win_focus(client *c) {
     cur = c;
     XSetInputFocus(d, cur->w, RevertToParent, CurrentTime);
 }
-
 
 void notify_destroy(XEvent *e) {
     win_del(e->xdestroywindow.window);
@@ -209,7 +207,6 @@ void button_release(XEvent *e) {
     mouse.subwindow = 0;
 }
 
-
 void win_add(Window w) {
     client *c;
 
@@ -245,7 +242,6 @@ void win_del(Window w) {
 
     free(x);
 }
-
 
 void win_kill(const Arg arg) {
     (void)arg;
@@ -442,7 +438,6 @@ void input_grab(Window root) {
     XFreeModifiermap(modmap);
 }
 
-
 int main(void) {
     XEvent ev;
 
@@ -493,5 +488,3 @@ int main(void) {
     while (1 && !XNextEvent(d, &ev))
         if (events[ev.type]) events[ev.type](&ev);
 }
-
-/*tung*/
